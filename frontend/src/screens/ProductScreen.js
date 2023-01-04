@@ -5,15 +5,15 @@ import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
 
 const ProductScreen = () => {
-  const params = useParams()
+  const { id } = useParams()
   const [product, setProduct] = useState({})
 
   useEffect(() => {
     fetchProduct()
-  }, [])
+  }, [id])
 
   const fetchProduct = async () => {
-    const { data } = await axios.get(`/api/products/${params.id}`)
+    const { data } = await axios.get(`/api/products/${id}`)
 
     setProduct(data)
   }
@@ -34,7 +34,7 @@ const ProductScreen = () => {
 
         <Col md={3}>
           <ListGroup variant='flush'>
-            <ListGroup.Item onClick={() => window.speechSynthesis.speak(msg)}>
+            <ListGroup.Item>
               <h3>{product.name}</h3>
             </ListGroup.Item>
             <ListGroup.Item>
